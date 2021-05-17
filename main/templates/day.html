@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-lg-12 col-md-12 featured-post" style="padding-top: 25px">
+        <p><span class="featured-post-title">{{ month|title }}, {{ year }} год</span></p>
+    </div>
+    {% for day in my_data %}
+        <div class="col-lg-2">
+        {% csrf_token %}
+            <a href="/main/note?day={{ day }}" class="year" style="text-decoration: none">
+               <p>
+                   <span class="featured-post-title">{{ day }}</span>
+               </p>
+            </a>
+        </form>
+        </div>
+    {% endfor %}
+
+{% endblock %}

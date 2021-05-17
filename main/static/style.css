@@ -1,0 +1,145 @@
+.header h1{
+    letter-spacing: 7px;
+    font-size: 300%;
+}
+
+.tools a:hover {
+    background-color: chartreuse !important;
+    color: #070707 !important;
+}
+
+a{
+    color: #e3e8ea !important;
+}
+
+.clear {
+    clear: both;
+    height: 63px;
+}
+
+.wrapper {
+    min-height: 100%;
+}
+
+.note {
+    padding-top: 30px;
+    font-family: cursive;
+    font-size: 50px;
+}
+
+html, body{
+    height: 100%;
+}
+
+footer {
+    color: chartreuse;
+    background: #070707;
+    padding: 17px 0 18px 0;
+    border-top: 1px solid black;
+}
+
+footer a{
+    color: #999;
+    text-decoration: none !important;
+}
+
+p > span {
+    padding: 17px 0 18px 0;
+    font-size: 30px;
+    line-height: 1.42857143;
+    text-align: center;
+    color: #000000;
+    box-sizing: border-box;
+    position: relative;
+    max-height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid black;
+    transition: .5s;
+}
+
+footer a:hover{
+    color: #e3e8ea;
+}
+
+.year a{
+    color: black !important;
+}
+p > span {
+    background-position: center;
+    background-color: white !important;
+}
+
+p > span:hover{
+    background-color: chartreuse;
+}
+
+.year:hover span{
+    color: white !important;
+    transition: 2s;
+    background-color: #333 !important;
+}
+
+.ce_button a {
+    text-align: left !important;
+    width: 100px;
+    margin: 0;
+    padding: 50px;
+    word-spacing: 1px;
+    display: flex;
+    color: black !important;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    display: block;
+    width: 100%;
+    text-align: center;
+    --base: 2.7778vw;
+    --font-size-ultrabig: 12.0vw;
+    --line-height-ultrabig: 12.0vw;
+    --z-index-0: 0;
+    --z-index-1: 1000;
+    --z-index-2: 2000;
+    --radius: 30px;
+    --font-size: 12px;
+    --line-height: 24px;
+    --font-size-small: 9px;
+    --line-height-small: 9px;
+    --font-size-big: 32px;
+    --line-height-big: 32px;
+    --font-size-h1: 24px;
+    --line-height-h1: 32px;
+    --font-size-h4: 18px;
+    --line-height-h4: 26px;
+    --font-size-claim: 9vw;
+    --line-height-claim: 10vw;
+    font-family: "Bodoni MT Poster Compressed";
+    font-weight: normal;
+    color: #ffffff;
+    font-size: 40px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+:root {
+    --base: 2.7778vw;
+    --font-size: 1.1vw;
+    --line-height: 2.0vw;
+    --font-size-small: 0.7vw;
+    --line-height-small: 0.7vw;
+    --font-size-big: 5.0vw;
+    --line-height-big: 5.0vw;
+    --font-size-ultrabig: 12.0vw;
+    --line-height-ultrabig: 12.0vw;
+    --font-size-claim: 7.0vw;
+    --line-height-claim: 7.0vw;
+    --font-size-h1: 4.0vw;
+    --line-height-h1: 4.4vw;
+    --font-size-h4: 1.5vw;
+    --line-height-h4: 2.5vw;
+    --z-index-0: 0;
+    --z-index-1: 1000;
+    --z-index-2: 2000;
+    --radius: 30px;
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-lg-12 col-md-12 featured-post" style="padding-top: 25px">
+        <p><span class="featured-post-title">{{ year }} год</span></p>
+    </div>
+    {% for month in my_data %}
+        <div class="col-lg-4">
+           <a href="/main/day?month={{ month }}"  class=year style="text-decoration: none">
+               <p>
+                   <span class="featured-post-title">{{ month }}</span>
+               </p>
+           </a>
+        </div>
+    {% endfor %}
+
+{% endblock %}
