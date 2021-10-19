@@ -11,6 +11,10 @@ year = 0
 month = ''
 
 
+def react(request):
+    return render(request, 'react.html')
+
+
 def year(request):
     global login, login_watch, watch_status
     try:
