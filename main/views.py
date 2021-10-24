@@ -2,7 +2,18 @@ from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from . import models
 from django.db.utils import IntegrityError
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import re
+import json
 
+#pyTelegramBotAPI
+# from multiprocessing import Process
+# from . import telegram_api
+# def pytelegrambotapi():
+#     telegram_api.main()
+# process1 = Process(target=pytelegrambotapi)
+# process1.start()
 
 login = ''
 login_watch = ''
@@ -12,7 +23,7 @@ month = ''
 
 
 def react(request):
-    return render(request, 'react.html')
+    return render(request, 'index.html')
 
 
 def year(request):
@@ -111,3 +122,31 @@ def users(request):
 
 def new_note(request):
     return render(request, 'new.html', {'name': models.User.objects.get(login=login).name})
+
+
+@csrf_exempt
+def send_data(request):
+    if request.method == 'GET':
+        ans = []
+        for obj in models.User_data.objects.all():
+            if obj.login_id == login:
+                resp = obj.text.replace(' ', '')
+                km = re.findall(r'(\d*[,]?\d+)км', resp)
+                m = re.findall(r'(\d*[,]?\d+)м', resp)
+                total = 0
+                for group_km in km:
+                    if group_km[0] == ',':
+                        group_km = group_km[1:]
+                    group_km = group_km.replace(',', '.')
+                    total += float(group_km)
+                for group_m in m:
+                    if group_m[0] == ',':
+                        group_m = group_m[1:]
+                    group_m = group_m.replace(',', '.')
+                    total += float(group_m)/1000
+                total *= 1.1
+                ans.append(total)
+        return HttpResponse(json.dumps({'response': ans}))
+
+
+
