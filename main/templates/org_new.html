@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <form method="post"  enctype="multipart/form-data" action="/main/year/">
+        {% csrf_token %}
+        <p></p>
+        <p class="text-center">
+            <label for="year">Год: </label>
+            <input id="year" minlength="4" list="years"
+                   maxlength="4" type="text"  name="year" required />
+            <datalist id="years">
+                <option value="2021">
+            </datalist>
+        </p>
+        <p class="text-center">
+             <label for="month">Месяц: </label>
+            <input id="month" type="text" list="browsers" name="month" required />
+            <datalist id="browsers">
+                  <option value="январь">
+                  <option value="февраль">
+                  <option value="март">
+                  <option value="апрель">
+                  <option value="май">
+                  <option value="июнь">
+                  <option value="июль">
+                  <option value="август">
+                  <option value="сентябрь">
+                  <option value="октябрь">
+                  <option value="ноябрь">
+                  <option value="декабрь">
+                </datalist>
+        </p>
+        <p class="text-center">
+            <label for="day">День: </label>
+            <input id="day" type="text"  maxlength="2" name="day" required>
+        </p>
+
+        <p class="text-center" style="color: black; font-size: 150%">Тренировка:<Br>
+            <textarea name="note" cols="70" rows="8"></textarea>
+        </p>
+        <p class="text-center">
+            <input type="submit" value="Записать">
+            <input type="reset" value="Очистить">
+        </p>
+    </form>
+{% endblock %}
