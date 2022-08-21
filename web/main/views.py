@@ -29,9 +29,9 @@ def year(request):
         if request.POST.get('login', 0) != 0:
             login = request.POST['login']
             if login in [obj.login for obj in models.User.objects.all()]:
-                models.User.objects.get_or_create(login=login, password=request.POST['password'],)
+                models.User.objects.get_or_create(login=login, password=request.POST['password'], )
             else:
-                return render(request, 'form.html', {'exists': 'account does not exists'})
+                return render(request, 'templates/form.html', {'exists': 'account does not exists'})
         if request.POST.get('day', 0) != 0:
             user = models.User.objects.get(login=login)
             user.user_data_set.create(year=(request.POST['year']),
@@ -44,7 +44,7 @@ def year(request):
         if request.POST.get('login_reg', 0) != 0:
             models.User.objects.get_or_create(login=request.POST['login_reg'], password=request.POST['password_reg'], name=request.POST['name'])
         if login in [obj.login for obj in models.User.objects.all()]:
-            return render(request, 'year.html', {'login': login, 'my_data': {'2020': 1, '2021': 2}, 'name': models.User.objects.get(login=login).name})
+            return render(request, 'templates/year.html', {'login': login, 'my_data': {'2020': 1, '2021': 2}, 'name': models.User.objects.get(login=login).name})
         else:
             return form(request)
     except IntegrityError:
@@ -60,13 +60,13 @@ def month(request):
             if obj.login.login == login_watch and obj.year == int(year):
                 if obj.month not in list_months:
                     list_months.append(obj.month)
-        return render(request, 'month.html', {'my_data': list_months, 'year': year, 'name': models.User.objects.get(login=login_watch).name})
+        return render(request, 'templates/month.html', {'my_data': list_months, 'year': year, 'name': models.User.objects.get(login=login_watch).name})
     list_months = []
     for obj in models.User_data.objects.all():
         if obj.login.login == login and obj.year == int(year):
             if obj.month not in list_months:
                 list_months.append(obj.month)
-    return render(request, 'month.html', {'my_data': list_months, 'year': year, 'name': models.User.objects.get(login=login).name})
+    return render(request, 'templates/month.html', {'my_data': list_months, 'year': year, 'name': models.User.objects.get(login=login).name})
 
 
 def day(request):
@@ -78,12 +78,12 @@ def day(request):
             if obj.login.login == login_watch and obj.year == int(year) and obj.month == month:
                 if obj.day not in list_days:
                     list_days.append(obj.day)
-        return render(request, 'day.html', {'my_data': list_days, 'year': year, 'month': month, 'name': models.User.objects.get(login=login_watch).name})
+        return render(request, 'templates/day.html', {'my_data': list_days, 'year': year, 'month': month, 'name': models.User.objects.get(login=login_watch).name})
     for obj in models.User_data.objects.all():
         if obj.login.login == login and obj.year == int(year) and obj.month == month:
             if obj.day not in list_days:
                 list_days.append(obj.day)
-    return render(request, 'day.html', {'my_data': list_days, 'year': year, 'month': month, 'name': models.User.objects.get(login=login).name})
+    return render(request, 'templates/day.html', {'my_data': list_days, 'year': year, 'month': month, 'name': models.User.objects.get(login=login).name})
 
 
 def note(request):
@@ -92,13 +92,13 @@ def note(request):
     if watch_status:
         for obj in models.User_data.objects.all():
             if obj.login.login == login_watch and obj.year == int(year) and obj.month == month and obj.day == int(day):
-                return render(request, 'note.html',
+                return render(request, 'templates/note.html',
                               {'my_data': [obj.text], 'year': year, 'month': month, 'day': request.GET['day'], 'name': models.User.objects.get(login=login_watch).name})
     for obj in models.User_data.objects.all():
         if obj.login.login == login and obj.year == int(year) and obj.month == month and obj.day == int(day):
-            return render(request, 'note.html',
-            {'my_data': [obj.text], 'year': year, 'month': month, 'day': request.GET['day'], 'name': models.User.objects.get(login=login).name})
-    return render(request, 'note.html', {'year': year, 'month': month, 'day': request.GET['day']})
+            return render(request, 'templates/note.html',
+                          {'my_data': [obj.text], 'year': year, 'month': month, 'day': request.GET['day'], 'name': models.User.objects.get(login=login).name})
+    return render(request, 'templates/note.html', {'year': year, 'month': month, 'day': request.GET['day']})
 
 
 def form(request):
@@ -106,18 +106,18 @@ def form(request):
         pass
     except MultiValueDictKeyError:
         pass
-    return render(request, 'form.html')
+    return render(request, 'templates/form.html')
 
 
 def users(request):
     users = []
     for user in models.User.objects.all():
         users.append(user.login)
-    return render(request,'users_base.html', {'users': users, 'name': models.User.objects.get(login=login).name})
+    return render(request, 'templates/users_base.html', {'users': users, 'name': models.User.objects.get(login=login).name})
 
 
 def new_note(request):
-    return render(request, 'new.html', {'name': models.User.objects.get(login=login).name})
+    return render(request, 'templates/new.html', {'name': models.User.objects.get(login=login).name})
 
 
 @csrf_exempt
