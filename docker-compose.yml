@@ -1,25 +1,27 @@
 version: "3"
 
 services:
-#  db:
-#    image: postgres:13-alpine
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data/
-#    environment:
-#      - POSTGRES_USER=admin
-#      - POSTGRES_PASSWORD==admin
-#      - POSTGRES_DB==db
-#    ports:
-#      - "5432:5432"
+  db:
+    image: postgres:13-alpine
+    container_name: db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD==admin
+      - POSTGRES_DB==db
+    ports:
+      - "5432:5432"
 
-  app:
+  web:
+    container_name: web
     build:
       dockerfile: web/Dockerfile
     restart: on-failure
     depends_on:
       - db
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
       - ./web:/app
     command: python manage.py runserver 0.0.0.0:8000
@@ -27,6 +29,20 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD==admin
       - POSTGRES_DB==db
+
+  telegram:
+    container_name: telegram
+    build:
+      dockerfile: web/Dockerfile
+    restart: on-failure
+    depends_on:
+      - web
+      - db
+    volumes:
+      - ./telegram:/app
+    command: python main.py
+
+
 
 
 volumes:
