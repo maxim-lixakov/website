@@ -108,7 +108,7 @@ def second_command(message):
     update_state(message, TYPE)
     CURRENT_INFO = []
     bot.send_message(message.chat.id, "тренировка записана")
-    with open("my_plan.json", "w") as write_file:
+    with open("data.json", "w") as write_file:
         json.dump(DATA, write_file)
     update_run_dates()
     start_command(message)
