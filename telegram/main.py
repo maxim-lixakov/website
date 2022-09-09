@@ -5,6 +5,7 @@ import time
 
 import telebot
 from telebot import types
+import requests
 
 
 with open("data.json", "r") as f:
@@ -26,6 +27,7 @@ months = {"01": "январь", "02": "февраль", "03": "март",
           "07": "июль", "08": "август", "09": "сентябрь",
           "10": "октябрь", "11": "ноябрь", "12": "декабрь"}
 run_dates = {}
+
 
 def update_run_dates():
     global run_dates
@@ -110,6 +112,13 @@ def second_command(message):
     bot.send_message(message.chat.id, "тренировка записана")
     with open("data.json", "w") as write_file:
         json.dump(DATA, write_file)
+    headers = {'Content-Type': 'application/json'}
+    with open("data.json", "r") as f:
+        print(json.load(f))
+        try:
+            requests.post('http://web:8000/main/api/', json=json.load(f), headers=headers)
+        except:
+            pass
     update_run_dates()
     start_command(message)
 
