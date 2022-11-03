@@ -1,4 +1,5 @@
 from collections import defaultdict
+import os
 import json
 from multiprocessing import Process
 import time
@@ -14,7 +15,7 @@ with open("data.json", "r") as f:
 
 status = ["", ""]
 state = ""
-TOKEN = "1300872028:AAFZCKxpZM96IoK_R6cfS8MLp09tVmMX8Y8"
+TOKEN = os.getenv('TOKEN')
 TYPE, INFO, DATE = range(3)
 USER_STATE = defaultdict(lambda: TYPE)
 CURRENT_INFO = []
