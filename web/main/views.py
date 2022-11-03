@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from . import models
+from . import json_to_sql_converter
 from django.db.utils import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -20,6 +21,16 @@ login_watch = ''
 watch_status = 0
 year = 0
 month = ''
+
+
+@csrf_exempt
+def api(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+        result = json_to_sql_converter.dump_data(data)
+        # result = 'OK'
+        return HttpResponse(json.dumps({'status': result}))
 
 
 def year(request):
@@ -44,7 +55,7 @@ def year(request):
         if request.POST.get('login_reg', 0) != 0:
             models.User.objects.get_or_create(login=request.POST['login_reg'], password=request.POST['password_reg'], name=request.POST['name'])
         if login in [obj.login for obj in models.User.objects.all()]:
-            return render(request, 'templates/year.html', {'login': login, 'my_data': {'2020': 1, '2021': 2}, 'name': models.User.objects.get(login=login).name})
+            return render(request, 'templates/year.html', {'login': login, 'my_data': {'2020': 1, '2021': 2, '2022': 3},'name': models.User.objects.get(login=login).name})
         else:
             return form(request)
     except IntegrityError:

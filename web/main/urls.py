@@ -8,5 +8,6 @@ urlpatterns = [
     path('day/', views.day),
     path('note/', views.note),
     path('users/', views.users),
-    path('newnote/', views.new_note)
+    path('newnote/', views.new_note),
+    path('api/', views.api)
 ]
